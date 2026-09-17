@@ -1,106 +1,70 @@
-# Fonksiyonlu Kapı
+<div align="center">
 
-Arduino tabanlı, **matematiksel doğrulama + keypad + uzaktan kontrol** bileşenlerini bir araya getiren akıllı kapı ve aydınlatma prototipidir.
+# 🚪 Fonksiyonlu Kapı
 
-Kapının açılması için sistem tarafından rastgele bir sayı üretilir ve tanımlı matematiksel fonksiyonun sonucu kullanıcıdan istenir. Doğru cevap verildiğinde kapı açılır. Aynı sistem içerisinde alkış sensörü, IR kumanda ve Bluetooth üzerinden aydınlatma ve kapı kontrolü de bulunur.
+**Arduino • Keypad • Matematiksel Doğrulama • IoT/Remote Control**
+
+Matematiksel doğrulama mekanizmasını kapı ve aydınlatma kontrolüyle birleştiren embedded prototip.
+
+<img src="docs/flow.svg" alt="Doğrulama akışı" width="900">
+
+</div>
+
+---
 
 ## ✨ Özellikler
 
-- 🔢 Matematiksel fonksiyon ile kapı doğrulaması
-- ⌨️ 4x3 keypad ile kullanıcı girişi
-- 🚪 Motor / röle üzerinden kapı kontrolü
-- 📟 20x4 I2C LCD arayüzü
-- 👏 Çift alkış ile ışık kontrolü
-- 📺 IR kumanda ile ışık kontrolü
-- 📱 Bluetooth üzerinden komut alma
-- 🔊 Buzzer ile kullanıcı geri bildirimi
-- ⏱️ Cevap için zaman sınırlaması
+- 🔢 `f(x) = 2x² + 1` doğrulaması
+- ⌨️ 4x3 keypad
+- 🚪 Motor / röle kontrolü
+- 📟 20x4 I2C LCD
+- 👏 Çift alkışla ışık
+- 📺 IR kumanda
+- 📱 Bluetooth komutları
+- 🔊 Buzzer feedback
+- ⏱️ 7 saniyelik cevap penceresi
 
-## 🧠 Doğrulama Mantığı
-
-Sistem rastgele bir `x` değeri üretir ve aşağıdaki fonksiyonu uygular:
+## 🧠 Verification Flow
 
 ```text
-f(x) = 2x² + 1
+# → Rastgele x → f(x) hesapla → Kullanıcı sonucu
+                                      ↓
+                              Doğru / Yanlış
+                               ↓           ↓
+                            Kapıyı aç    Reddet
 ```
 
-Kullanıcının belirlenen süre içerisinde doğru sonucu girmesi halinde kapı açılır. Yanlış cevapta giriş reddedilir.
+## 💡 Aydınlatma
 
-## 🛠️ Donanım ve Teknolojiler
+Işık; çift alkış, IR kumanda veya tanımlı Bluetooth komutları üzerinden kontrol edilir.
 
-- Arduino
-- Keypad
-- 20x4 I2C LCD
-- IR receiver
-- Bluetooth modülü
-- Ses sensörü
-- Röle
-- Buzzer
-- Kapı motoru / aktüatör
-- Arduino C/C++
+## 🛠️ Donanım & Kütüphaneler
 
-### Kullanılan kütüphaneler
+Arduino · Keypad · LCD · IR Receiver · Bluetooth · Ses sensörü · Röle · Buzzer · Motor
 
-- `Wire`
-- `LiquidCrystal_I2C`
-- `Keypad`
-- `IRremote`
-- `SoftwareSerial`
+`Wire` · `LiquidCrystal_I2C` · `Keypad` · `IRremote` · `SoftwareSerial`
 
-## 🔄 Çalışma Akışı
+## 🚀 Kurulum
 
-```text
-Başlangıç
-   ↓
-Keypad üzerinden #
-   ↓
-Rastgele sayı oluştur
-   ↓
-f(x) hesapla
-   ↓
-Kullanıcı sonucu girer
-   ↓
-Doğru mu?
- ┌─┴──────────┐
- ↓             ↓
-Evet          Hayır
- ↓             ↓
-Kapıyı aç     Girişi reddet
-```
+1. Arduino IDE'de kartı seçin.
+2. Gerekli kütüphaneleri yükleyin.
+3. Pinleri kaynak koduyla eşleştirin.
+4. Firmware'i yükleyin.
+5. Keypad, IR, Bluetooth ve sensörleri ayrı ayrı test edin.
 
-## 💡 Aydınlatma Kontrolü
+## 🔐 Güvenlik
 
-Aydınlatma üç farklı yöntemle kontrol edilebilir:
+Bu proje eğitim/prototip amaçlıdır. Fiziksel erişim sistemlerinde matematiksel doğrulama tek başına yeterli bir güvenlik mekanizması değildir; kimlik doğrulama, yetkilendirme ve güvenli haberleşme ayrıca tasarlanmalıdır.
 
-- Çift alkış
-- IR kumandadaki tanımlı tuşlar
-- Bluetooth üzerinden komutlar
-
-Örnek Bluetooth komutları arasında `aç`, `kapat`, `ışığı aç` ve `ışığı kapat` bulunur.
-
-## 📁 Proje Yapısı
+## 📁 Yapı
 
 ```text
 FONKSIYONLU_KAPI/
 ├── fonksiyon_son_deneme.ino
+├── docs/flow.svg
 └── README.md
 ```
 
-## 🚀 Kurulum
-
-1. Arduino IDE'yi açın.
-2. Gerekli kütüphaneleri yükleyin.
-3. `fonksiyon_son_deneme.ino` dosyasını açın.
-4. Donanım bağlantılarını kaynak koddaki pin tanımlarıyla eşleştirin.
-5. Kodu Arduino'ya yükleyin.
-6. LCD ve Serial Monitor üzerinden sistem durumunu takip edin.
-
-## ⚠️ Güvenlik Notu
-
-Bu proje eğitim/prototip amaçlıdır. Gerçek bir fiziksel erişim sisteminde yalnızca matematiksel bir doğrulama mekanizmasına güvenilmemeli; kimlik doğrulama, yetkilendirme, hata yönetimi ve güvenli haberleşme ayrıca tasarlanmalıdır.
-
-## 🚧 Geliştirme Durumu
+## 🚧 Durum
 
 **Prototip / deneysel çalışma**
-
-Gelecekte kullanıcı bazlı yetkilendirme, daha güçlü kimlik doğrulama, olay kayıtları ve modüler donanım sürücüleri eklenebilir.
