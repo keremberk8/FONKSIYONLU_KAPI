@@ -8,6 +8,8 @@ Matematiksel doğrulama mekanizmasını kapı ve aydınlatma kontrolüyle birle�
 
 <img src="docs/flow.svg" alt="Doğrulama akışı" width="900">
 
+<img src="docs/control-pulse.svg" alt="Door control animation" width="900">
+
 </div>
 
 ---
@@ -62,6 +64,7 @@ Bu proje eğitim/prototip amaçlıdır. Fiziksel erişim sistemlerinde matematik
 FONKSIYONLU_KAPI/
 ├── fonksiyon_son_deneme.ino
 ├── docs/flow.svg
+├── docs/control-pulse.svg
 └── README.md
 ```
 
